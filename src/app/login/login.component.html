@@ -1,31 +1,35 @@
-<main>
-  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">TeamSync</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav ms-auto">
-            <a class="nav-link" aria-current="page" routerLink="/">Home</a>
-            <a class="nav-link" routerLink="/login">Login</a>
-            <a class="nav-link" routerLink="/signup">SignUp</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+<body>
     <div class="contain">
-      <form class="data" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <Label for="emailinput">Email</Label>
-          <input type="email" name="usernameInput" id="usernameInput" [(ngModel)]="user.username">
+        <div class="login-card">
+            <div class="login-header">
+                <button class="back-button" routerLink="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <h2>Login</h2>
+            </div>
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="email" name="email" id="email" placeholder="Email" [(ngModel)]="user.username" required email #emailcheck="ngModel">
+                    <label for="email">Email</label>
+                    <div *ngIf="emailcheck.invalid && emailcheck.touched" class="alert">
+                        <div *ngIf="emailcheck.errors?.['required']">Email is required !</div>
+                        <div *ngIf="emailcheck.errors?.['email']">Please provide valid email address.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" placeholder="Password" required minlength="8" maxlength="20" [(ngModel)]="user.password" #passcheck="ngModel">
+                    <label for="password">Password</label>
+                    <div *ngIf="passcheck.invalid && passcheck.touched" class="alert">
+                        <div *ngIf="passcheck.errors?.['required']">Password is required !</div>
+                        <div *ngIf="passcheck.errors?.['minlength']">Password must be at least 8 chars long !</div>
+                        <div *ngIf="passcheck.errors?.['maxlength']">Password can't exceed 20 chars !</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p>Don't have an account? <a routerLink="/signup">Sign up</a></p>
         </div>
-        <div class="form-group">
-          <Label for="passwordinput">Password</Label>
-          <input type="password" name="passwordInput" id="passwordinput" [(ngModel)]="user.password">
-        </div>
-        <button type="submit" class="btn btn-secondary">Login</button>
-      </form>
-  </div>
-</main>
-<router-outlet></router-outlet>
+    </div>
+</body>

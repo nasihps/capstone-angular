@@ -6,6 +6,7 @@ import { LoggedoutComponent } from './loggedout/loggedout.component';
 import { LoggedinComponent } from './loggedin/loggedin.component';
 import { authGuard } from './auth.guard';
 
+
 export const routes: Routes = [
     {path: "", component: HomeComponent},
     {path: "login", component: LoginComponent},

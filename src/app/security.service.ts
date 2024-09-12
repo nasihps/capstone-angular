@@ -13,11 +13,11 @@ export class SecurityService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  private url = 'http://localhost:9099';
+  private url = 'http://localhost:7050';
 
   jwt: string = "";
 
-  currentUser: UserRegister = new UserRegister(0,"","","");
+  currentUser: UserRegister = new UserRegister(0,"","","","","");
 
   register(newUser: UserRegister): Observable<UserRegister>{
     return this.http.post<UserRegister>(`${this.url}/register`, newUser);

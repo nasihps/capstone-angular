@@ -1,33 +1,190 @@
-main{
-    height: 100vh;
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.contain{
-    background-color: #B5CFB7;
+
+/* Background image styling */
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background image container */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/home-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); 
+}
+
+/* Overlay to dim the background image */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 62, 80, 0.7); 
+}
+
+/* Container styling */
+.contain {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 91%;
+    height: 100%;
+    position: relative;
+    z-index: 2; 
 }
-.data{
-    display: grid;
-    grid-template-rows: repeat(auto-fill, 1fr);
-    justify-content: center;
 
-    height: 50vh;    
-    padding: 70px 100px;
-    margin: 40px;
-    width: 50%;
-
-    background-color: #CADABF;
-    border-radius: 10px;
+/* Card styling */
+.login-card {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 30px 40px;
+    border-radius: 8px;
+    border-top-right-radius: 8px !important; 
+    border-bottom-right-radius: 8px !important; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
 }
-.form-group{
+
+.login-header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
-.form-group>label, .form-group>input{
-    margin: 10px;
-    border-radius: 8px;
+
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 10px;
+    color: rgb(58, 123, 188);
+    transition: color 0.3s ease;
+}
+
+.back-button:hover {
+    color: #0056b3;
+}
+
+.login-header h2 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 45px;
+}
+
+/* Adjust the login card padding to accommodate the new layout */
+/* .login-card {
+    padding: 20px 30px;
+} */
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+/* Floating label styling */
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    padding-top: 20px; 
+    padding-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-top-right-radius: 8px !important; 
+    border-bottom-right-radius: 8px !important; 
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease, padding-top 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: transparent; 
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 15px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #fff;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+.form-group label {
+    position: absolute;
+    top: 16px; 
+    left: 15px;
+    font-size: 16px;
+    color: #888;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* Button styling */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: rgb(58, 123, 188);
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Add this to your existing CSS */
+.login-card p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-card a {
+    text-decoration: none;
+    color: rgb(58, 123, 188);
+    transition: color 0.3s ease;
+}
+
+.login-card a:hover {
+    color: #0056b3;
+}
+
+.alert{
+    color: red;
 }

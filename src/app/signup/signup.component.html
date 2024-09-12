@@ -1,39 +1,64 @@
-<main>
-    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
-        <div class="container-fluid">
-        <a class="navbar-brand" href="#">TeamSync</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ms-auto">
-            <a class="nav-link" aria-current="page" routerLink="/">Home</a>
-            <a class="nav-link" routerLink="/login">Login</a>
-            <a class="nav-link" routerLink="/signup">SignUp</a>
-            </div>
+<body>
+    <div class="contain">
+        <div class="login-card">
+            <h2>Sign Up</h2>
+            <form (ngSubmit)="onSubmit()">
+                <div class="row-container">
+                    <div class="form-group">
+                        <label for="userid">ID</label>
+                        <input type="number" name="userid" id="userid" placeholder="0000" [(ngModel)]="userId" minlength="4" required #idcheck="ngModel">
+                        <div *ngIf="idcheck.invalid && idcheck.touched" class="alert">
+                            <div *ngIf="idcheck.errors?.['required']">ID required !</div>
+                            <div *ngIf="idcheck.errors?.['minlength']">ID must be at least 4 chars long !</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" placeholder="John Doe" [(ngModel)]="user.name" required minlength="3" #namecheck="ngModel">
+                        <div *ngIf="namecheck.invalid && namecheck.touched" class="alert">
+                            <div *ngIf="namecheck.errors?.['required']">Name is required !</div>
+                            <div *ngIf="namecheck.errors?.['minlength']">Name must be at least 3 chars long !</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-container">
+                    <div class="form-group">
+                        <label for="org">Organization</label>
+                        <input type="text" name="org" id="org" placeholder="Tata" [(ngModel)]="user.organization" required minlength="3" #orgcheck="ngModel">
+                        <div *ngIf="orgcheck.invalid && orgcheck.touched" class="alert">
+                            <div *ngIf="orgcheck.errors?.['required']">Organizationis required !</div>
+                            <div *ngIf="orgcheck.errors?.['minlength']">Organization must be at least 3 chars long !</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="timezone">Timezone</label>
+                        <select id="timezone" name="Asia/Kolkata" class="form-control" [(ngModel)]="user.timezone">
+                            <option *ngFor="let timezone of timezones" [value]="timezone">{{ timezone }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row-container">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="johndoe@mail.com" [(ngModel)]="user.username" required email #emailcheck="ngModel">
+                        <div *ngIf="emailcheck.invalid && emailcheck.touched" class="alert">
+                            <div *ngIf="emailcheck.errors?.['required']">Email is required !</div>
+                            <div *ngIf="emailcheck.errors?.['email']">Please provide valid email address.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" placeholder="********" required minlength="8" maxlength="20" [(ngModel)]="user.password" #passcheck="ngModel">
+                        <div *ngIf="passcheck.invalid && passcheck.touched" class="alert">
+                            <div *ngIf="passcheck.errors?.['required']">Password is required !</div>
+                            <div *ngIf="passcheck.errors?.['minlength']">Password must be at least 8 chars long !</div>
+                            <div *ngIf="passcheck.errors?.['maxlength']">Password can't exceed 20 chars !</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn" type="submit">Sign Up</button>
+                <p>Already have an account? <a routerLink="/login">Login</a></p>
+            </form>
         </div>
-        </div>
-    </nav>
-    <div class="contain" >
-        <form class="data" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <Label for="idInput" >ID</Label>
-                <input type="text" name="idInput" id="idInput" [(ngModel)]="userId">
-            </div>
-            <div class="form-group">
-                <Label for="nameInput" >Name</Label>
-                <input type="text" name="nameInput" id="nameInput"[(ngModel)]="user.name">
-            </div>
-            <div class="form-group">
-                <Label for="emailInput" >Email</Label>
-                <input type="email" name="emailInput" id="emailInput"[(ngModel)]="user.username">
-            </div>
-            <div class="form-group">
-                <Label for="passwordInput" >Password</Label>
-                <input type="password" name="passwordInput" id="passwordInput" [(ngModel)]="user.password">
-            </div>
-            <button type="submit" class="btn btn-secondary">Register</button>
-        </form>
     </div>
-</main>
-<router-outlet></router-outlet>
+</body>
